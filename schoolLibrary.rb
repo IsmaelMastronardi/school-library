@@ -18,6 +18,21 @@ class Person
   end
 end
 
-person_1 = Person.new(18, "ismael", false)
+class Student < Person
+  def initialize(age, name = "unknown", parent_permission = true, classroom)
+    super(age, name , parent_permission )
+    @classroom  = classroom 
+  end
+  def play_hooky
+    puts "¯\\(ツ)/¯"
+  end
+end
 
+person_1 = Student.new(18, "ismael", false)
+
+
+
+puts person_1.name
+puts person_1.age
 person_1.can_use_services?
+person_1.play_hooky
