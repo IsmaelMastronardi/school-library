@@ -1,10 +1,8 @@
-require './person'
-
 class Person
   attr_reader :id
   attr_accessor :age, :name
 
-  def initialize(age, name = 'unknown', parent_permission = true)
+  def initialize(age, name = 'unknown', parent_permission: true)
     @id = rand(1..1000)
     @age = age
     @name = name
