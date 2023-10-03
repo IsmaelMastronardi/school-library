@@ -1,6 +1,4 @@
-# frozen_string_literal: true
-
-require './Person'
+require './person'
 
 class Person
   attr_reader :id
