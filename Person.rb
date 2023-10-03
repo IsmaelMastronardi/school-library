@@ -1,9 +1,12 @@
-require './Person.rb'
+# frozen_string_literal: true
+
+require './Person'
 
 class Person
   attr_reader :id
-  attr_accessor  :age ,:name
-  def initialize(age, name = "unknown", parent_permission = true)
+  attr_accessor :age, :name
+
+  def initialize(age, name = 'unknown', parent_permission = true)
     @id = rand(1..1000)
     @age = age
     @name = name
@@ -15,6 +18,7 @@ class Person
   end
 
   private
+
   def of_age?
     @age >= 18
   end
