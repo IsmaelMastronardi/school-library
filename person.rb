@@ -1,4 +1,6 @@
-class Person
+require './nameable.rb'
+
+class Person < Nameable
   attr_reader :id
   attr_accessor :age, :name
 
@@ -13,9 +15,14 @@ class Person
     puts of_age? || @parent_permission
   end
 
+
   private
 
   def of_age?
     @age >= 18
   end
 end
+
+person_1 = Person.new(18, 'Ismael')
+
+person_1.correct_name
