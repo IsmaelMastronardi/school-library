@@ -25,6 +25,3 @@ class Person < Nameable
   end
 end
 
-person_1 = Person.new(18, 'Ismael')
-
-person_1.correct_name
