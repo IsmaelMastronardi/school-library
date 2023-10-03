@@ -11,5 +11,3 @@ class Student < Person
   end
 end
 
-student_1 = Student.new('math', 18, 'ismael')
-puts student_1.correct_name
