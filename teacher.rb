@@ -11,4 +11,4 @@ class Teacher < Person
   end
 end
 
-# teacher_1 = Teacher.new('bioogy', 40, 'Adrian')
+

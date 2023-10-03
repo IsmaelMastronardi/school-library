@@ -1,7 +1,7 @@
-require './person.rb'
-require './base_decorator.rb'
-require './capitalize_decorator.rb'
-require './trimmer_decorator.rb'
+require './person'
+require './base_decorator'
+require './capitalize_decorator'
+require './trimmer_decorator'
 
 person = Person.new(22, 'maximilianus')
 person.correct_name
