@@ -54,7 +54,7 @@ git clone git@github.com:IsmaelMastronardi/morse_translator.git
 Go to the project directory.
 
 ```bash
-  cd morse_translator
+  cd https://github.com/IsmaelMastronardi/school-library.git
 ```
 ### Usage
 To use the app, follow these steps:
