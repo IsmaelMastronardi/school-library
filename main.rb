@@ -6,5 +6,3 @@ require './student'
 require './classroom'
 require './book'
 require './rental'
-
-
