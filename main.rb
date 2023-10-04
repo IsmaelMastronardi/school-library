@@ -4,6 +4,8 @@ require './capitalize_decorator'
 require './trimmer_decorator'
 require './student'
 require './classroom'
+require './book'
+require './rental'
 
 # person = Person.new(22, 'maximilianus')
 # person.correct_name
@@ -53,3 +55,37 @@ require './classroom'
 # puts mathClassroom.students.last
 # puts '14'
 # puts mathClassroom.students.last.name
+
+person1 = Person.new(20,'ismael')
+person2 = Person.new(40, 'flavio')
+
+book1 = Book.new('stormligth', 'branderson')
+book2 = Book.new('harryPotter', 'j.k.rawling')
+
+rental1 = Rental.new('2021/01/01',book1,person1)
+rental2 = Rental.new('2022/02/02',book1,person1)
+
+puts person1.rentals.count
+
+puts person1.rentals.map {|rental| rental.date}
+
+puts book1.rentals.count
+
+puts book2.rentals.count
+
+puts book1.rentals.map {|rental| rental.date}
+
+rental3 = Rental.new('2023/03/03',book2,person2)
+rental4 = Rental.new('2024/04/04',book2,person1)
+
+puts person2.rentals.count
+
+puts person2.rentals.map {|rental| rental.date}
+
+puts book2.rentals.count
+
+puts book2.rentals.map {|rental| rental.date}
+
+puts book1.rentals.count
+
+puts book1.rentals.map {|rental| rental.date}
