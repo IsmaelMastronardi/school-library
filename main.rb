@@ -6,3 +6,87 @@ require './student'
 require './classroom'
 require './book'
 require './rental'
+class App
+  def initialize 
+    @persons = []
+    @books = []
+    @rentals = []
+  end
+
+ def options
+  puts "1 - List all books."
+  puts "2 - List all people."
+  puts "3 - Create a person (teacher or student, not a plain Person)."
+  puts "4 - Create a book."
+  puts "5 - Create a rental."
+  puts "6 - List all rentals for a given person id."
+  puts "q - quit"
+  input = gets.chomp
+
+  case input
+    when "1" 
+      list_all_books
+    when "2"
+      list_all_people
+    when "3"
+      create_a_person
+    when "4"
+      create_a_book
+    when "5"
+      create_a_rental
+    when "6"
+      list_all_rentals
+    when 'q'
+      quit_app
+    else 
+      puts 'there was an error'
+    end
+  end
+
+  def list_all_books()
+    if @books.length === 0 
+      puts 'no books yet'
+    else 
+      @books.map{|book| puts book.title}
+    end
+    options
+  end
+
+ def list_all_people
+  puts 'list all people'
+ end
+
+ def create_a_person
+  puts 'Create a person'
+ end
+
+ def create_a_book
+  puts '[TITLE]: '
+  title = gets.chomp
+  puts '[AUTHOR]: '
+  author = gets.chomp
+  book = Book.new(title, author)
+  @books.push(book)
+  puts 'book created'
+  options
+ end
+
+ def create_a_rental
+  puts 'Create a rental'
+ end
+
+ def list_all_rentals
+  puts 'List all rentals'
+ end
+
+ def quit_app
+  puts 'goodbye'
+ end
+
+end
+
+def main
+  app = App.new()
+  app.options()
+end
+main()
