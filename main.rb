@@ -6,9 +6,11 @@ require './student'
 require './classroom'
 require './book'
 require './rental'
+require './teacher'
 class App
   def initialize 
-    @persons = []
+    @students = []
+    @teachers = []
     @books = []
     @rentals = []
   end
@@ -43,7 +45,7 @@ class App
     end
   end
 
-  def list_all_books()
+  def list_all_books
     if @books.length === 0 
       puts 'no books yet'
     else 
@@ -53,17 +55,60 @@ class App
   end
 
  def list_all_people
-  puts 'list all people'
+  if @students.length === 0 && @teachers.length === 0
+    puts 'no people yet'
+  elsif @students.length > 0
+    @students.map{|student| puts "[Student] Name: #{student.name}, ID: #{student.id}, Age: #{student.age}"}
+  elsif @teachers.length > 0
+    @teachers.map{|teacher| puts "[Teacher] Name: #{teacher.name}, ID: #{teacher.id}, Age: #{teacher.age}"}
+  end
+  options
  end
 
  def create_a_person
-  puts 'Create a person'
+  print 'Do you want to create a student (1) of a teacher (2)[Input the number]: '
+  input = gets.chomp.to_i
+  if input === 1 
+    create_a_student
+  else 
+    create_a_teacher
+  end
+ end 
+
+ def create_a_student
+  print 'Age: '
+  age = gets.chomp
+  print 'Name: '
+  name = gets.chomp
+  print 'Has parent permission= [Y/N]: '
+  permissionInput = gets.chomp.upcase
+  permission = true
+  if permissionInput === 'N'
+    permission = false
+  end
+  student = Student.new(permission, age, name)
+  @students.push(student)
+  puts 'Person created successfully'
+  options
+ end
+
+ def create_a_teacher
+  print 'Age: '
+  age = gets.chomp
+  print 'Name: '
+  name = gets.chomp
+  print 'Specialization: '
+  specialization = gets.chomp.upcase
+  teacher = Teacher.new(specialization, age, name)
+  @teachers.push(teacher)
+  puts 'Person created successfully'
+  options
  end
 
  def create_a_book
-  puts '[TITLE]: '
+  print '[TITLE]: '
   title = gets.chomp
-  puts '[AUTHOR]: '
+  print '[AUTHOR]: '
   author = gets.chomp
   book = Book.new(title, author)
   @books.push(book)
