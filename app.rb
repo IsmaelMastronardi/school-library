@@ -22,8 +22,10 @@ class App
     puts '5 - Create a rental.'
     puts '6 - List all rentals for a given person id.'
     puts '7 - Exit'
+    chose_options
+  end
+  def chose_options()
     input = gets.chomp.downcase
-
     case input
     when '1'
       list_all_books('list')
@@ -44,9 +46,10 @@ class App
     end
   end
 
+
   def list_all_books(action)
     puts
-    if @books.length == 0
+    if @books.length.zero? 
       puts 'no books yet'
       puts
       options
@@ -65,7 +68,7 @@ class App
 
   def list_all_people(action)
     puts
-    if @people.length == 0
+    if @people.length.zero? 
       puts 'no people yet'
       puts
       options
@@ -88,7 +91,7 @@ class App
     age = gets.chomp
     print 'Name: '
     name = gets.chomp
-    if input === 1
+    if input == 1
       create_a_student(name, age)
     else
       create_a_teacher(name, age)
@@ -171,5 +174,6 @@ class App
     puts
     puts 'Thank you for using this app!'
     puts
+    exit
   end
 end
