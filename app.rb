@@ -27,20 +27,20 @@ class App
     puts '5 - Create a rental.'
     puts '6 - List all rentals for a given person id.'
     puts '7 - Exit'
-    choose_options
   end
 
   def choose_options
+    options
     input = gets.chomp(1..7)
     case input
-    when '1' then list_all_books('list')   
+    when '1' then list_all_books('list')
     when '2' then list_all_people('list')
-    when '3' then create_a_person   
+    when '3' then create_a_person
     when '4' then create_a_book
     when '5' then rental_values
     when '6' then list_all_rentals
     when '7' then quit_app
-      break
+    break
     end
   end
 
