@@ -22,7 +22,7 @@ class App
   puts "5 - Create a rental."
   puts "6 - List all rentals for a given person id."
   puts "7 - Exit"
-  input = gets.chomp
+  input = gets.chomp.downcase
 
   case input
     when "1" 
@@ -37,7 +37,7 @@ class App
       get_rental_values
     when "6"
       list_all_rentals
-    when 'q'
+    when 'q', 'quit', 'exit' 
       quit_app
     else 
       puts 'there was an error'
