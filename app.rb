@@ -14,7 +14,7 @@ class App
     @rentals = []
   end
 
-  def greetings
+  def run
     puts 'Welcome to School Library App!'
     options
   end
@@ -33,20 +33,14 @@ class App
   def choose_options
     input = gets.chomp(1..7)
     case input
-    when '1'
-      list_all_books('list')
-    when '2'
-      list_all_people('list')
-    when '3'
-      create_a_person
-    when '4'
-      create_a_book
-    when '5'
-      rental_values
-    when '6'
-      list_all_rentals
-    when '7'
-      quit_app
+    when '1' then list_all_books('list')   
+    when '2' then list_all_people('list')
+    when '3' then create_a_person   
+    when '4' then create_a_book
+    when '5' then rental_values
+    when '6' then list_all_rentals
+    when '7' then quit_app
+      break
     end
   end
 
