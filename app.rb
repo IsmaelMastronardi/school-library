@@ -45,8 +45,11 @@ class App
   end
 
   def list_all_books(action)
+    puts
     if @books.length === 0 
       puts 'no books yet'
+      puts
+      options
     else 
       @books.map.with_index{
         |book, index| 
@@ -58,13 +61,17 @@ class App
       puts
     end
     if action != 'rental'
+      puts
        options
     end
   end
 
  def list_all_people(action)
+  puts
   if @people.length === 0 
     puts 'no people yet'
+    puts 
+    options
   end
   @people.map.with_index{
     |person, index|
@@ -74,11 +81,13 @@ class App
     puts "[#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
   }
   if action != "rental"
+    puts
     options
   end
  end
 
  def create_a_person
+  puts
   print 'Do you want to create a student (1) of a teacher (2)[Input the number]: '
   input = gets.chomp.to_i
   print 'Age: '
@@ -102,6 +111,7 @@ class App
   student = Student.new(permission, age, name)
   @people.push(student)
   puts 'Person created successfully'
+  puts
   options
  end
 
@@ -111,10 +121,12 @@ class App
   teacher = Teacher.new(specialization, age, name)
   @people.push(teacher)
   puts 'Person created successfully'
+  puts
   options
  end
 
  def create_a_book
+  puts
   print '[TITLE]: '
   title = gets.chomp
   print '[AUTHOR]: '
@@ -122,10 +134,12 @@ class App
   book = Book.new(title, author)
   @books.push(book)
   puts 'book created'
+  puts
   options
  end
 
  def get_rental_values
+  puts
   puts 'Select a book from the following list by number'
   list_all_books('rental')
   bookIndex = gets.chomp.to_i
@@ -136,6 +150,7 @@ class App
   date = gets.chomp
   create_rental(date, bookIndex, personIndex)
   puts "Rental created successfully"
+  puts
   options
  end
 
@@ -149,10 +164,10 @@ class App
  end
 
  def list_all_rentals
+  puts
   puts 'ID of person: '
   id = gets.chomp
   puts 'Rentals: '
-  @rentals.each do |rental| puts rental.person.id end
   person_rentals = @rentals.select {|rental| rental.person.id === id.to_i} 
   person_rentals.map.with_index{
     |rental, index| 
@@ -163,7 +178,9 @@ class App
  end
 
  def quit_app
+  puts
   puts 'Thank you for using this app!'
+  puts
  end
 
 end
