@@ -143,10 +143,23 @@ class App
   book = @books[bookIndex]
   person = @people[personIndex]
   rental = Rental.new(date, book, person)
+  @rentals.push(rental)
+  @rentals.each do |rental| puts rental.person.id end
+  
  end
 
  def list_all_rentals
-  puts 'List all rentals'
+  puts 'ID of person: '
+  id = gets.chomp
+  puts 'Rentals: '
+  @rentals.each do |rental| puts rental.person.id end
+  person_rentals = @rentals.select {|rental| rental.person.id === id.to_i} 
+  person_rentals.map.with_index{
+    |rental, index| 
+    puts "Date: #{rental.date}, Book: \"#{rental.book.title}\" by #{rental.book.author}"
+  }
+  puts 
+  options
  end
 
  def quit_app
