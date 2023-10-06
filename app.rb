@@ -25,6 +25,11 @@ class App
     choose_options
   end
 
+  def greetings
+    puts "Welcome to School Library App!"
+    choose_options
+  end
+
   def choose_options
     input = gets.chomp.downcase
     case input
@@ -42,13 +47,10 @@ class App
       list_all_rentals
     when 'q', 'quit', 'exit' 
       quit_app
-    else
-      puts 'there was an error'
     end
   end
 
   def list_all_books(action)
-    puts
     if @books.length.empty?
       puts 'no books yet'
       options
@@ -66,7 +68,6 @@ class App
   end
 
   def list_all_people(action)
-    puts
     if @people.length.empty?
       puts 'no people yet'
       options
@@ -81,7 +82,6 @@ class App
   end
 
   def create_a_person
-    puts
     print 'Do you want to create a student (1) of a teacher (2)[Input the number]: '
     input = gets.chomp.to_i
     print 'Age: '
@@ -118,7 +118,6 @@ class App
   end
 
   def create_a_book
-    puts
     print '[TITLE]: '
     title = gets.chomp
     print '[AUTHOR]: '
@@ -131,7 +130,6 @@ class App
   end
 
   def rental_values
-    puts
     puts 'Select a book from the following list by number'
     list_all_books('rental')
     book_index = gets.chomp.to_i
@@ -155,7 +153,6 @@ class App
   end
 
   def list_all_rentals
-    puts
     puts 'ID of person: '
     id = gets.chomp
     puts 'Rentals: '
