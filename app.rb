@@ -9,8 +9,7 @@ require './rental'
 require './teacher'
 class App
   def initialize 
-    @students = []
-    @teachers = []
+    @people = []
     @books = []
     @rentals = []
   end
@@ -18,24 +17,24 @@ class App
  def options
   puts "1 - List all books."
   puts "2 - List all people."
-  puts "3 - Create a person (teacher or student, not a plain Person)."
+  puts "3 - Create a person."
   puts "4 - Create a book."
   puts "5 - Create a rental."
   puts "6 - List all rentals for a given person id."
-  puts "q - quit"
+  puts "7 - Exit"
   input = gets.chomp
 
   case input
     when "1" 
-      list_all_books
+      list_all_books('list')
     when "2"
-      list_all_people
+      list_all_people('list')
     when "3"
       create_a_person
     when "4"
       create_a_book
     when "5"
-      create_a_rental
+      get_rental_values
     when "6"
       list_all_rentals
     when 'q'
@@ -45,41 +44,55 @@ class App
     end
   end
 
-  def list_all_books
+  def list_all_books(action)
     if @books.length === 0 
       puts 'no books yet'
     else 
-      @books.map{|book| puts book.title}
+      @books.map.with_index{
+        |book, index| 
+        if action === 'rental'
+          print "#{index}\)"
+        end
+        puts "Title: \"#{book.title}\", Author: #{book.author}"
+      }
+      puts
     end
-    options
+    if action != 'rental'
+       options
+    end
   end
 
- def list_all_people
-  if @students.length === 0 && @teachers.length === 0
+ def list_all_people(action)
+  if @people.length === 0 
     puts 'no people yet'
-  elsif @students.length > 0
-    @students.map{|student| puts "[Student] Name: #{student.name}, ID: #{student.id}, Age: #{student.age}"}
-  elsif @teachers.length > 0
-    @teachers.map{|teacher| puts "[Teacher] Name: #{teacher.name}, ID: #{teacher.id}, Age: #{teacher.age}"}
   end
-  options
+  @people.map.with_index{
+    |person, index|
+    if action === 'rental' 
+      print "#{index}\)"
+    end
+    puts "[#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+  }
+  if action != "rental"
+    options
+  end
  end
 
  def create_a_person
   print 'Do you want to create a student (1) of a teacher (2)[Input the number]: '
   input = gets.chomp.to_i
-  if input === 1 
-    create_a_student
-  else 
-    create_a_teacher
-  end
- end 
-
- def create_a_student
   print 'Age: '
   age = gets.chomp
   print 'Name: '
   name = gets.chomp
+  if input === 1 
+    create_a_student(name, age)
+  else 
+    create_a_teacher(name, age)
+  end
+ end 
+
+ def create_a_student(name, age)
   print 'Has parent permission= [Y/N]: '
   permissionInput = gets.chomp.upcase
   permission = true
@@ -87,20 +100,16 @@ class App
     permission = false
   end
   student = Student.new(permission, age, name)
-  @students.push(student)
+  @people.push(student)
   puts 'Person created successfully'
   options
  end
 
- def create_a_teacher
-  print 'Age: '
-  age = gets.chomp
-  print 'Name: '
-  name = gets.chomp
+ def create_a_teacher(name, age)
   print 'Specialization: '
   specialization = gets.chomp.upcase
   teacher = Teacher.new(specialization, age, name)
-  @teachers.push(teacher)
+  @people.push(teacher)
   puts 'Person created successfully'
   options
  end
@@ -116,8 +125,24 @@ class App
   options
  end
 
- def create_a_rental
-  puts 'Create a rental'
+ def get_rental_values
+  puts 'Select a book from the following list by number'
+  list_all_books('rental')
+  bookIndex = gets.chomp.to_i
+  puts 'Select a person from the following list by number (not id)'
+  list_all_people('rental')
+  personIndex = gets.chomp.to_i
+  puts "Date: "
+  date = gets.chomp
+  create_rental(date, bookIndex, personIndex)
+  puts "Rental created successfully"
+  options
+ end
+
+ def create_rental(date, bookIndex, personIndex)
+  book = @books[bookIndex]
+  person = @people[personIndex]
+  rental = Rental.new(date, book, person)
  end
 
  def list_all_rentals
@@ -125,7 +150,7 @@ class App
  end
 
  def quit_app
-  puts 'goodbye'
+  puts 'Thank you for using this app!'
  end
 
 end
