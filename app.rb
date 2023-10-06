@@ -15,7 +15,7 @@ class App
   end
 
   def greetings
-    puts "Welcome to School Library App!"
+    puts 'Welcome to School Library App!'
     options
   end
 
@@ -31,21 +31,21 @@ class App
   end
 
   def choose_options
-    input = gets.chomp.downcase
+    input = gets.chomp(1..7)
     case input
-    when '1' 
+    when '1'
       list_all_books('list')
-    when '2' 
+    when '2'
       list_all_people('list')
-    when '3' 
+    when '3'
       create_a_person
-    when '4' 
+    when '4'
       create_a_book
-    when '5' 
+    when '5'
       rental_values
-    when '6' 
+    when '6'
       list_all_rentals
-    when 'q', 'quit', 'exit' 
+    when '7'
       quit_app
     end
   end
@@ -77,6 +77,7 @@ class App
       puts "[#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
     return unless action != 'rental'
+    
     puts
     options
   end
