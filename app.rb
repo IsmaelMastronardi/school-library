@@ -156,7 +156,7 @@ class App
     puts 'ID of person: '
     id = gets.chomp
     puts 'Rentals: '
-    person_rentals = @rentals.select { |item| item.person.id == id.to_i }
+    person_rentals = @rentals.select { |item| item.person.id == id}
     person_rentals.map.with_index do |item, _index|
       puts "Date: #{item.date}, Book: \"#{item.book.title}\" by #{item.book.author}"
     end
