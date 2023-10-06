@@ -22,36 +22,28 @@ class App
     puts '5 - Create a rental.'
     puts '6 - List all rentals for a given person id.'
     puts '7 - Exit'
-    chose_options
+    choose_options
   end
-  def chose_options()
+
+  def choose_options
     input = gets.chomp.downcase
     case input
-    when '1'
-      list_all_books('list')
-    when '2'
-      list_all_people('list')
-    when '3'
-      create_a_person
-    when '4'
-      create_a_book
-    when '5'
-      rental_values
-    when '6'
-      list_all_rentals
-    when 'q', 'quit', 'exit'
-      quit_app
+    when '1' list_all_books('list')
+    when '2' list_all_people('list')
+    when '3' create_a_person
+    when '4' create_a_book
+    when '5' rental_values
+    when '6' list_all_rentals
+    when 'q', 'quit', 'exit' quit_app
     else
       puts 'there was an error'
     end
   end
 
-
   def list_all_books(action)
     puts
-    if @books.length.zero? 
+    if @books.length.empty?
       puts 'no books yet'
-      puts
       options
     else
       @books.map.with_index do |book, index|
@@ -68,9 +60,8 @@ class App
 
   def list_all_people(action)
     puts
-    if @people.length.zero? 
+    if @people.length.empty?
       puts 'no people yet'
-      puts
       options
     end
     @people.map.with_index do |person, index|
@@ -78,7 +69,6 @@ class App
       puts "[#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
     return unless action != 'rental'
-
     puts
     options
   end
@@ -154,7 +144,7 @@ class App
     person = @people[person_index]
     rental = Rental.new(date, book, person)
     @rentals.push(rental)
-    @rentals.each { |rental| puts rental.person.id }
+    @rentals.each { |item| puts item.person.id }
   end
 
   def list_all_rentals
@@ -171,9 +161,7 @@ class App
   end
 
   def quit_app
-    puts
     puts 'Thank you for using this app!'
-    puts
     exit
   end
 end
