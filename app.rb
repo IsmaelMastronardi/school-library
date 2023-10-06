@@ -34,7 +34,7 @@ class App
     when '4'
       create_a_book
     when '5'
-      get_rental_values
+      rental_values
     when '6'
       list_all_rentals
     when 'q', 'quit', 'exit'
@@ -46,13 +46,13 @@ class App
 
   def list_all_books(action)
     puts
-    if @books.length === 0
+    if @books.length == 0
       puts 'no books yet'
       puts
       options
     else
       @books.map.with_index do |book, index|
-        print "#{index}\)" if action === 'rental'
+        print "#{index})" if action == 'rental'
         puts "Title: \"#{book.title}\", Author: #{book.author}"
       end
       puts
@@ -65,13 +65,13 @@ class App
 
   def list_all_people(action)
     puts
-    if @people.length === 0
+    if @people.length == 0
       puts 'no people yet'
       puts
       options
     end
     @people.map.with_index do |person, index|
-      print "#{index}\)" if action === 'rental'
+      print "#{index})" if action == 'rental'
       puts "[#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
     return unless action != 'rental'
@@ -97,9 +97,9 @@ class App
 
   def create_a_student(name, age)
     print 'Has parent permission= [Y/N]: '
-    permissionInput = gets.chomp.upcase
+    permission_input = gets.chomp.upcase
     permission = true
-    permission = false if permissionInput === 'N'
+    permission = false if permission_input == 'N'
     student = Student.new(permission, age, name)
     @people.push(student)
     puts 'Person created successfully'
@@ -130,25 +130,25 @@ class App
     options
   end
 
-  def get_rental_values
+  def rental_values
     puts
     puts 'Select a book from the following list by number'
     list_all_books('rental')
-    bookIndex = gets.chomp.to_i
+    book_index = gets.chomp.to_i
     puts 'Select a person from the following list by number (not id)'
     list_all_people('rental')
-    personIndex = gets.chomp.to_i
+    person_index = gets.chomp.to_i
     puts 'Date: '
     date = gets.chomp
-    create_rental(date, bookIndex, personIndex)
+    create_rental(date, book_index, person_index)
     puts 'Rental created successfully'
     puts
     options
   end
 
-  def create_rental(date, bookIndex, personIndex)
-    book = @books[bookIndex]
-    person = @people[personIndex]
+  def create_rental(date, book_index, person_index)
+    book = @books[book_index]
+    person = @people[person_index]
     rental = Rental.new(date, book, person)
     @rentals.push(rental)
     @rentals.each { |rental| puts rental.person.id }
@@ -159,9 +159,9 @@ class App
     puts 'ID of person: '
     id = gets.chomp
     puts 'Rentals: '
-    person_rentals = @rentals.select { |rental| rental.person.id === id.to_i }
-    person_rentals.map.with_index do |rental, _index|
-      puts "Date: #{rental.date}, Book: \"#{rental.book.title}\" by #{rental.book.author}"
+    person_rentals = @rentals.select { |item| item.person.id == id.to_i }
+    person_rentals.map.with_index do |item, _index|
+      puts "Date: #{item.date}, Book: \"#{item.book.title}\" by #{item.book.author}"
     end
     puts
     options
