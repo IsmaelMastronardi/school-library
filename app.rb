@@ -27,11 +27,11 @@ class App
     puts '5 - Create a rental.'
     puts '6 - List all rentals for a given person id.'
     puts '7 - Exit'
+    choose_options
   end
 
   def choose_options
-    options
-    input = gets.chomp(1..7)
+    input = gets.chomp
     case input
     when '1' then list_all_books('list')
     when '2' then list_all_people('list')
@@ -39,18 +39,23 @@ class App
     when '4' then create_a_book
     when '5' then rental_values
     when '6' then list_all_rentals
-    when '7' then quit_app
-    break
+    else quit_option(input)
     end
   end
 
+  def quit_option(input)
+    return unless input == '7'
+
+    quit_app
+  end
+
   def list_all_books(action)
-    if @books.length.empty?
+    if @books.empty?
       puts 'no books yet'
       options
     else
       @books.map.with_index do |book, index|
-        print "#{index})" if action == 'rental'
+        print "#{index})"
         puts "Title: \"#{book.title}\", Author: #{book.author}"
       end
       puts
@@ -62,16 +67,16 @@ class App
   end
 
   def list_all_people(action)
-    if @people.length.empty?
+    if @people.empty?
       puts 'no people yet'
       options
     end
     @people.map.with_index do |person, index|
-      print "#{index})" if action == 'rental'
+      print "#{index})"
       puts "[#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
     return unless action != 'rental'
-    
+
     puts
     options
   end
