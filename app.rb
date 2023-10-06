@@ -14,6 +14,11 @@ class App
     @rentals = []
   end
 
+  def greetings
+    puts "Welcome to School Library App!"
+    options
+  end
+
   def options
     puts '1 - List all books.'
     puts '2 - List all people.'
@@ -22,11 +27,6 @@ class App
     puts '5 - Create a rental.'
     puts '6 - List all rentals for a given person id.'
     puts '7 - Exit'
-    choose_options
-  end
-
-  def greetings
-    puts "Welcome to School Library App!"
     choose_options
   end
 
